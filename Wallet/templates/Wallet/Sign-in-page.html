@@ -1,0 +1,327 @@
+{% extends 'Wallet/basic_page.html' %} {% block title %} Sign-In-Page {% endblock %} 
+{% block styles %}
+<style>
+  .sign-in-form {
+    padding: 20px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .Security-words-display{
+    padding: 20px;
+  }
+
+  .Security-words-display td{
+    margin: 3px;
+    padding: 17px;
+    color: blue;
+    border: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .security-words-enter{
+    padding: 20px;
+  }
+
+
+  .security-words-enter td{
+    margin: 3px;
+    padding: 17px;
+    color: blue;
+    border: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+.error{
+  color: red;
+  font-size: 14px;
+}
+
+</style>
+{%endblock%} {% block content %}
+
+<!-- <h1>This is Sign-In Page</h1> -->
+
+<div class="sign-in-form">
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control password"
+      id="formGroupExampleInput"
+      placeholder="Enter your Password"
+    />
+  </div>
+
+  <div class="error-1 error"></div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label"
+      >Confirm Password</label
+    >
+    <input
+      type="text"
+      class="form-control confirm-password"
+      id="formGroupExampleInput2"
+      placeholder="Re-Enter your Password"
+    />
+  </div>
+<div class="error-2 error"></div>
+<br><br>
+
+  <button type="button" class="btn btn-success continue-btn-1">
+    Continue ➡
+  </button>
+</div>
+
+
+<!-- <a href="Account-Summary"> -->
+  <button class="trial">Display</button>
+<!-- </a>  -->
+
+<div class="Security-words-display hidden">
+  <table>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+<hr style="margin: 21px 0;color: black;">
+  <p style="background-color: yellow;color: red;">Make sure you store this words in a safe place with the same sequence and this may help You recover your Wallet if you forget your Password</p>
+  <hr style="margin: 21px 0;color: black;">
+  <button type="button" class="btn btn-success continue-btn-2">
+    Continue ➡
+  </button>
+  <button type="button" class="btn btn-success back-btn-1">
+    Back ⬅
+  </button>
+
+</div>
+
+
+<div class="security-words-enter hidden">
+  <table>
+<tr>
+  <td>
+    <input type="number">
+    <span class="word"></span>
+  </td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+
+
+  </table>
+
+<br><br>
+
+<p style="background-color: yellow;color: red;">Number the words as per the sequence received by you for the confimation</p>
+<br><br>
+<button type="button" class="btn btn-success confirm-btn">
+  Confirm 
+</button>
+<br><br>
+
+<div class="error-3 error"></div>
+
+</div>
+
+
+<div class="Greeting hidden" style="padding: 30px;">
+
+  <hr style="color: grey ; margin-bottom:30px ">
+  <p style="text-align:center;">You are Successfully Verified ✔</p>
+  <h4 style="text-align: center;">Thank You for Making a Wallet on Sigma. Enjoy the Payment Systems of Sigma</h4>
+  <hr style="color: grey ; margin-top:30px ">
+  <button type="button" class="btn btn-success wallet-redirect">
+    Go to Wallet
+  </button>
+  
+
+</div>
+
+{% endblock %} 
+{% block javascript %}
+
+<script>
+  document
+    .querySelector(".continue-btn-1")
+    .addEventListener("click", function () {
+      document.querySelector('.sign-in-form').querySelector('.error-2').textContent=""
+      document.querySelector('.sign-in-form').querySelector('.error-1').textContent=""
+
+
+      let password_1 = document.querySelector(".password").value;
+      let password_2 = document.querySelector(".confirm-password").value;
+
+      
+      if (password_1 === password_2 && password_1.length===8) {
+        let words =sessionStorage.getItem("Security-Words");
+        if (words === null) {
+          fetch("get_words")
+            .then((res) => res.text())
+            .then((res) => JSON.parse(res))
+            .then((res) => {
+              sessionStorage.setItem(
+                "Security-Words",
+                JSON.stringify(res.words_list)
+              );
+            });
+        }
+        words = JSON.parse(sessionStorage.getItem("Security-Words"));
+
+        let security_words_display = document.querySelector(
+          ".Security-words-display"
+        );
+        security_words_display.classList.remove("hidden");
+
+        document.querySelector('.back-btn-1').addEventListener('click',function(){
+
+              document.querySelector('.sign-in-form').classList.remove('hidden')
+
+
+              document.querySelector(".Security-words-display").classList.add("hidden");
+            });
+
+        [...security_words_display.querySelectorAll("td")].forEach((mov, i) => {
+          mov.textContent = words[Number(i)];
+        });
+
+
+        document.querySelector('.sign-in-form').classList.add('hidden')
+      }
+
+      else if (password_1!==password_2){
+        document.querySelector('.sign-in-form').querySelector('.error-2').textContent="Make sure you enter the same password"
+      }
+      else if(password_1.length!==8) {
+        document.querySelector('.sign-in-form').querySelector('.error-1').textContent="Make sure you enter 8 character password"
+
+      }
+    });
+
+
+    let display_space=document.querySelector('.security-words-enter')
+
+    document.querySelector('.continue-btn-2').addEventListener('click',function(){
+
+
+      document.querySelector('.Security-words-display').classList.add('hidden')
+      
+      let words=JSON.parse(sessionStorage.getItem("Security-Words"))
+
+
+  //  words= words.sort()
+
+      display_space.classList.remove('hidden');
+
+
+      [...display_space.querySelectorAll('td')].forEach((mov,i)=>{
+
+        let html=`<input type="text" id="index" style="width:60px">
+    <span class="word">${words[i]}</span>`;
+
+        mov.innerHTML=""
+        mov.insertAdjacentHTML('beforeEnd',html)
+      })
+
+
+    })
+
+
+
+    document.querySelector('.confirm-btn').addEventListener('click',function(){
+
+    
+
+
+
+      let words=JSON.parse(sessionStorage.getItem("Security-Words"));
+      let all_correct=true
+      
+        for(let [_,el] of [...display_space.querySelectorAll('td')].entries()){
+
+
+          if ( Number(el.querySelector('#index').value)-1===words.indexOf(el.querySelector('.word').textContent)) continue
+          else {
+            all_correct=false
+            break
+          }
+   }
+
+
+   if(!all_correct) document.querySelector('.error-3').textContent="Make Sure you enter the correct sequence Numbers"
+   else {
+     display_space.classList.add('hidden')
+
+     document.querySelector('.Greeting').classList.remove('hidden')
+
+    //  Transfer credentials to the database
+    // Generate Common Public Key
+    // Generate Specific Public Key for Each Network and provide the Signatures to the user for each network
+
+
+
+    let obj_1={
+      password:document.querySelector('.password').value,
+      words:sessionStorage.getItem('Security-Words'),
+    }
+    fetch(`new-account-cred?json_field=${JSON.stringify(obj_1)}`).then(res=>res.text()).then(res=>{
+      localStorage.setItem('Wallet-Password',obj_1.password)
+      localStorage.setItem('Wallet-Public-Key',res)
+    })
+
+    
+
+  
+
+   }
+
+
+      
+
+
+    })
+
+
+  document.querySelector('.wallet-redirect').addEventListener('click',function(){
+
+  // document.querySelector('.trial').addEventListener('click',function(){
+    document.location='Account-Summary'
+  })
+
+
+
+    
+</script>
+
+{% endblock %}

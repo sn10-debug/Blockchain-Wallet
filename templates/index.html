@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+
+
+.account-type-title{
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+  
+}
+
+
+.account-type-title:hover{
+  border-style: solid;
+  border-width: 0 0 4px 0;
+  border-color: black;
+
+  
+}
+body{
+position: relative;
+}
+
+
+.hidden{
+  display: none;
+}
+
+.account-details-form{
+
+  width: 500px;
+  margin:48px auto;
+  text-align: center;
+
+
+
+}
+
+table{
+  margin: auto;
+}
+
+td{
+
+  padding: 20px;
+
+}
+
+
+
+.hidden{
+  display: none;
+}
+.Redirect-to-wallet-screen{
+  margin: 100px;
+  text-align: center;
+}
+
+.Personal-account-details-form{
+
+ 
+  /* margin: auto; */
+
+}
+
+
+.Security-words-entry input{
+  width: 120px;
+  text-align: center;
+  border-radius: 28px;
+}
+    </style>
+  </head>
+  <body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Sigma</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown link
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+    <hr style="border-width: 0 0 5px 0;opacity: 0;">
+
+
+  <div class="login-section">
+
+  <div class="Account-type">
+    <h1 class="account-type-title Personal-account-type-title">Personal Account</h1>
+    <h1 class="account-type-title Business-account-type-title">Business Account</h1>
+
+  </div>
+
+
+    <hr style="border-width: 0 0 5px 0;opacity: 0;">
+
+
+<div class="Account-details personal-account-active">
+    <div class="account-details-form">
+
+  <h3>Personal Account Log In</h3>
+  <hr style="border-width: 0 0 5px 0;border-style: solid;">
+    <p>Import Wallet using Security Phrase : </p>
+    <p>Make sure you enter the Security Phrase in the Correct sequence</p>
+
+  <table>  
+
+
+<!-- Taking password as input -->
+
+    <!-- <tr>
+   <td> <label for="Password">Password :&nbsp;&nbsp;</label>
+  </td>
+  <td><input type="password" name="" class="log-in-password" id="Password"></td> 
+</tr> -->
+
+
+
+<!-- Taking Security Words as input -->
+<tr>
+  
+  <td> <label for="">Security word-Phrase</label></td>
+  <td><table class="Security-words-entry">
+
+
+
+  </table>
+  </td>
+</tr>
+<tr>
+  <td></td>
+  <td><button type="button" class="btn btn-success log-in-btn">Log In</button></td>
+</tr>
+<tr>
+  <td></td>
+  <td>Create a Account ? <a href="Wallet/Sign-In"> <button type="button" class="btn btn-primary">Sign In</button></a>
+  </td>
+</tr>
+
+
+
+
+
+</table>
+
+
+
+    </div>
+</div>
+
+</div>
+
+
+
+<div class="Redirect-to-wallet-screen hidden">
+
+  <p class="greeting"></p>
+
+  <a href="Wallet/Account-Summary"> <button type="button"  class="btn btn-success wallet-redirect">
+    Go to Wallet
+  </button>
+</a>
+
+
+
+</div>
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+   
+
+    <script>
+
+
+document.querySelector('.Account-type').addEventListener('click',function(e){
+
+
+  if(e.target.classList.contains('account-type-title')){
+    if(e.target.classList.contains('Personal-account-type-title')) {
+      
+      document.querySelector('.account-details-form').querySelector('h3').textContent="Personal Account Form"
+      document.querySelector('.account-details-form').parentElement.classList.remove('bussiness-account-active')
+      document.querySelector('.account-details-form').parentElement.classList.add('personal-account-active')
+
+
+    }
+    else{
+
+      
+      document.querySelector('.account-details-form').querySelector('h3').textContent="Business Account Form"
+      document.querySelector('.account-details-form').parentElement.classList.add('bussiness-account-active')
+      document.querySelector('.account-details-form').parentElement.classList.remove('personal-account-active')
+
+
+
+
+    }
+  }
+});
+
+
+
+
+
+function checkExistence(){
+  
+  if (localStorage.getItem("Wallet-Public-Key")!==null){
+    document.querySelector('.login-section').classList.add('hidden')
+    document.querySelector('.Redirect-to-wallet-screen').classList.remove('hidden')
+    document.querySelector('.Redirect-to-wallet-screen').querySelector('.greeting').textContent=`Your Public Key : ${localStorage.getItem("Wallet-Public-Key")}`
+
+    document.location="Wallet/Account-Summary"
+
+
+  }
+
+
+}
+
+checkExistence()
+
+let words_html='<tr>'
+for(let i=1;i<=16;i++){
+
+  words_html+='<td><input type="text" name="" id="" class="security-word" ></td>'
+
+  if (i%4===0) words_html+=`</tr><tr>`
+
+
+}
+
+document.querySelector('.Security-words-entry').insertAdjacentHTML('beforeEnd',words_html)
+
+document.querySelector('.log-in-btn').addEventListener('click',function(){
+
+  let words=[];
+
+  [...document.querySelector('.Security-words-entry').querySelectorAll('td')].forEach(mov=>{
+
+    // console.log(mov.querySelector('input').value)
+    words.push(mov.querySelector('input').value)
+  })
+
+  let obj={
+    words
+  }
+  fetch(`Wallet/import-wallet?json=${JSON.stringify(obj)}`).then(res=>res.text()).then(res=>JSON.parse(res)).then(res=>{
+    // if (res.Status==="Success")
+
+
+    // Store the Common Public Key and store it in the Local Storage and then call the function checkExistence
+
+    
+    console.log(res)
+  })
+
+
+
+
+
+
+
+
+
+})
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+{% extends "Wallet/basic_page.html" %}
+
+{%block title %}Account Summary{%endblock%}
+{% block styles %} 
+<style>
+    .Token-Details td{
+        text-align: center;
+        margin: auto;
+        border: solid;
+        padding: 20px;
+    }
+
+    .user-details{
+        position: absolute;
+        right: 4px;
+    }
+
+</style>
+
+{%endblock%}
+
+{% block content %}
+
+
+<p class="Information">
+
+    <label for="Public-Key">Common Public Key : </label>
+    <span class="Public-Key" id="Public-Key"></span>
+</p>
+<h3 style="margin-top: 20px;text-align: center;">Account Summary</h3>
+
+
+<button>Buy</button>
+<button>Transfer</button>
+
+
+
+
+
+
+<table class="Token-Details">
+
+    <!-- <tr>
+        <td class="network_name"></td>
+        <td class="Token_list">
+            <table class="Token_Balance">
+                <tr>
+                <td class="token_name"></td>
+                <td class="token_balance"></td>
+            </tr>
+            </table>
+        </td>
+    </tr> -->
+</table>
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %} 
+<script>
+
+
+
+
+
+document.querySelector('#navbarDropdownMenuLink').textContent="User"
+
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+
+
+
+
+
+
+
+fetch(`get-info?pub_key=${localStorage.getItem('Wallet-Public-Key')}`).then(res=>res.text())
+.then(res=>JSON.parse(res))
+.then(res=>{
+    for (let [Network_Name,el] of Object.entries(res)){
+        let html=`<tr>
+        <td class="network_name"> ${Network_Name} </td>
+        <td class="network-pub-key">${el.Public_Key} </td>
+        <td class="Token_list">
+        <table class="Token_Balance">
+        `
+
+        for (let [i,el_2] of Object.entries(el.Token)){
+
+            let {Name:Token_Name,Balance}=el_2;
+            html+=`<tr><td class="token_name"> ${Token_Name}</td>
+                <td class="token_balance"> ${Balance}</td>
+                </tr>
+            `
+            
+    }
+
+    html+=`
+            </table>
+                    </td>
+                </tr>
+            </table>
+        `
+
+
+            document.querySelector('.Token-Details').insertAdjacentHTML('beforeEnd',html)
+    }
+})
+
+
+document.querySelector('.Information').querySelector(".Public-Key").textContent=localStorage.getItem('Wallet-Public-Key')
+
+</script>
+
+
+
+
+
+
+{% endblock %}
